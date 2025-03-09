@@ -132,7 +132,7 @@
         android:shadowDx="2"
         android:shadowDy="2"
         android:shadowRadius="4"
-        android:text="Selamat Datang Di BShop"
+        android:text="Selamat Datang Di Tasks"
         android:textColor="@android:color/white"
         android:textSize="32sp"
         android:textStyle="bold"

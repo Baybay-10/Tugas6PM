@@ -33,10 +33,10 @@
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintHorizontal_bias="0.661"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.185" />
+        app:layout_constraintVertical_bias="0.181" />
 
     <View
         android:id="@+id/divider"
@@ -45,10 +45,9 @@
         android:background="#ffffff"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.274" />
+        app:layout_constraintVertical_bias="0.268" />
 
     <EditText
         android:id="@+id/editTextText2"
@@ -56,7 +55,7 @@
         android:layout_height="67dp"
         android:ems="10"
         android:inputType="text"
-        android:text="Isi Nama Anda Disini"
+        android:hint="Isi Nama Anda Disini"
         android:textColor="#ffffff"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -71,7 +70,7 @@
         android:layout_height="67dp"
         android:ems="10"
         android:inputType="textEmailAddress"
-        android:text="Isi Email Anda Disini"
+        android:hint="isi email anda"
         android:textColor="#ffffff"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -86,6 +85,7 @@
         android:layout_height="67dp"
         android:ems="10"
         android:inputType="textPassword"
+        android:hint="isi password anda"
         android:textColor="#ffffff"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -94,40 +94,13 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.651" />
 
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Isi Password Anda Di Atas Ini"
-        android:textColor="#ffffff"
-        android:textSize="15dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.21"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.689" />
-
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Konfirmasi Password Anda Di Atas Ini"
-        android:textColor="#ffffff"
-        android:textSize="15dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.276"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.814" />
-
     <EditText
         android:id="@+id/editTextTextPassword3"
         android:layout_width="260dp"
         android:layout_height="67dp"
         android:ems="10"
         android:inputType="textPassword"
+        android:hint="konfirmasi password anda"
         android:textColor="#ffffff"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -137,7 +110,7 @@
         app:layout_constraintVertical_bias="0.782" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnSimpan"
         android:layout_width="162dp"
         android:layout_height="66dp"
         android:text="SIMPAN"

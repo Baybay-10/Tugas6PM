@@ -6,20 +6,22 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import com.example.tugas2pm.databinding.ActivityRegisterBinding
 
 
 class RegisterActivity : AppCompatActivity() {
+    private lateinit var binding : ActivityRegisterBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_register)
 
+        binding = ActivityRegisterBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val simpanLink: Button = findViewById(R.id.button2)
-
-        simpanLink.setOnClickListener{
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+        binding.btnSimpan.setOnClickListener{
+            val intentMain = Intent(this, MainActivity::class.java)
+            startActivity(intentMain)
         }
     }
 }

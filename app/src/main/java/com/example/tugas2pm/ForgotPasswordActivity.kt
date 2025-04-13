@@ -7,8 +7,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.widget.TextView
 import android.view.animation.AnimationUtils
 import android.widget.Button
+import com.example.tugas2pm.databinding.ActivityForgotPasswordBinding
+
 
 class ForgotPasswordActivity : AppCompatActivity() {
+    private lateinit var binding : ActivityForgotPasswordBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -18,11 +21,12 @@ class ForgotPasswordActivity : AppCompatActivity() {
         val fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in)
         welcomeText.startAnimation(fadeIn)
 
-        val continueLink: Button = findViewById(R.id.button)
+        binding = ActivityForgotPasswordBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        continueLink.setOnClickListener{
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+        binding.btnContinue.setOnClickListener{
+            val intentMain = Intent(this, MainActivity::class.java)
+            startActivity(intentMain)
         }
     }
 }

@@ -16,7 +16,7 @@
         android:layout_height="147dp">
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/imageView3"
             android:layout_width="110dp"
             android:layout_height="108dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -27,33 +27,23 @@
             app:layout_constraintVertical_bias="0.34"
             tools:srcCompat="@tools:sample/avatars" />
 
+
         <TextView
-            android:id="@+id/txtView1"
+            android:id="@+id/imageTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="MOBILE LEGENDS"
+            android:textAlignment="viewStart"
             android:textSize="20dp"
             android:textStyle="bold"
-            android:textAlignment="viewStart"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.622"
+            app:layout_constraintHorizontal_bias="0.647"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.208" />
+            app:layout_constraintVertical_bias="0.425" />
 
-        <TextView
-            android:id="@+id/txtView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Rp. : 1.500 - 2.000.000"
-            android:textAlignment="viewStart"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.617"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtView1"
-            app:layout_constraintVertical_bias="0.394" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

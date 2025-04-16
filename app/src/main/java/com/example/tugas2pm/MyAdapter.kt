@@ -1,5 +1,8 @@
 package com.example.tugas2pm
 
+import android.content.ClipData.Item
+import android.content.Intent
+import android.media.Image
 import android.view.LayoutInflater
 import androidx.recyclerview.widget.RecyclerView
 import android.view.View
@@ -7,11 +10,14 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 
+
 class MyAdapter(private val namaList : ArrayList<ItemData>): RecyclerView.Adapter<MyAdapter.MyViewHolder>(){
-    class MyViewHolder (itemData : View) : RecyclerView.ViewHolder (itemData){
-        val gambar : ImageView = itemData.findViewById(R.id.imageView2)
-        val nama : TextView = itemData.findViewById(R.id.txtView1)
-        val price : TextView = itemData.findViewById(R.id.txtView2)
+    var onItemClick : ((ItemData)-> Unit)? = null
+    class MyViewHolder(itemView : View):RecyclerView.ViewHolder(itemView){
+        val gambar : ImageView = itemView.findViewById(R.id.imageView3)
+        val nama : TextView = itemView.findViewById(R.id.imageTitle)
+//        val price : TextView = itemView.findViewById(R.id.txtView2)
+//        val desc : TextView = itemView.findViewById(R.id.imageDesc)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -22,9 +28,12 @@ class MyAdapter(private val namaList : ArrayList<ItemData>): RecyclerView.Adapte
     override fun getItemCount(): Int = namaList.size
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val currentItem = namaList[position]
-        holder.gambar.setImageResource(currentItem.gambar)
-        holder.nama.text = currentItem.nama
-        holder.price.text = currentItem.price
+        val topUp = namaList[position]
+        holder.gambar.setImageResource(topUp.gambar)
+        holder.nama.text = topUp.nama
+
+        holder.itemView.setOnClickListener{
+            onItemClick?.invoke(topUp)
+        }
     }
 }

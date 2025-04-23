@@ -7,9 +7,10 @@ import android.widget.TextView
 import android.view.animation.AnimationUtils
 import android.content.Intent
 import android.widget.Button
+import android.widget.EditText
 import com.example.tugas2pm.databinding.ActivityMainBinding
 
-
+const val EXTRA_MESSAGE = ""
 class MainActivity : AppCompatActivity() {
     private lateinit var binding : ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,6 +26,11 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val pesan = intent.getStringExtra(EXTRA_NAME)
+        val editText: EditText = findViewById<EditText>(R.id.editTextText).apply {
+            setText(pesan)
+        }
+
         binding.txtForgot.setOnClickListener{
             val intentMain = Intent(this, ForgotPasswordActivity::class.java)
             startActivity(intentMain)
@@ -36,8 +42,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.btnLogin.setOnClickListener{
-            val intentMain = Intent(this, DashboardActivity::class.java)
-            startActivity(intentMain)
+            startActivity(Intent(this, DashboardActivity::class.java).apply {
+                putExtra(EXTRA_MESSAGE,binding.editTextText.text.toString())
+            })
         }
     }
 }

@@ -1,8 +1,11 @@
 package com.example.tugas2pm
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -13,6 +16,7 @@ class DetailProductActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_detail_product)
+
 
         val product = intent.getParcelableExtra<ItemData>("product")
         if(product != null){
@@ -25,4 +29,5 @@ class DetailProductActivity : AppCompatActivity() {
             textViewDesc.text = product.Desc
         }
     }
+
 }

@@ -55,7 +55,7 @@
         android:layout_height="67dp"
         android:ems="10"
         android:inputType="text"
-        android:hint="Isi Nama Anda Disini"
+        android:hint="Isi Username Anda Disini"
         android:textColor="#ffffff"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

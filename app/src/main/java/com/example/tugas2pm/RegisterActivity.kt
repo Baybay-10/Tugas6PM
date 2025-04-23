@@ -8,7 +8,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tugas2pm.databinding.ActivityRegisterBinding
 
-
+const val EXTRA_NAME = ""
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding : ActivityRegisterBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,8 +20,9 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.btnSimpan.setOnClickListener{
-            val intentMain = Intent(this, MainActivity::class.java)
-            startActivity(intentMain)
+            startActivity(Intent(this, MainActivity::class.java).apply {
+                putExtra(EXTRA_MESSAGE,binding.editTextText2.text.toString())
+            })
         }
     }
 }

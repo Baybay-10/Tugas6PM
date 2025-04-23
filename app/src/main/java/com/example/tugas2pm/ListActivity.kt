@@ -2,6 +2,10 @@ package com.example.tugas2pm
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -11,8 +15,10 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tugas2pm.databinding.ActivityDashboardBinding
 import com.example.tugas2pm.databinding.ActivityListBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class ListActivity : AppCompatActivity() {
+    private lateinit var binding : ActivityListBinding
     private lateinit var produkRecyclerView: RecyclerView
     private lateinit var produkAdapter: MyAdapter
     private lateinit var listProduk : ArrayList<ItemData>
@@ -20,11 +26,45 @@ class ListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_list)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+
+        binding = ActivityListBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        val pesan = intent.getStringExtra(EXTRA_MESSAGE)
+        val textView: TextView = findViewById<TextView>(R.id.txtNama).apply {
+            text =  pesan
         }
+
+        val toolbar :  androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+
+        val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        bottomNav.setOnNavigationItemSelectedListener { menu ->
+            when (menu.itemId){
+                R.id.dashboard ->{
+                    val message = binding.txtNama.text.toString() // ganti sesuai ID EditText kamu
+                    val intent = Intent(this, DashboardActivity::class.java).apply {
+                        putExtra(EXTRA_MESSAGE, message)
+                    }
+                    startActivity(intent)
+                    true
+                }
+                R.id.profile -> {
+                    val message = binding.txtNama.text.toString() // ganti sesuai ID EditText kamu
+                    val intent = Intent(this, ProfileActivity::class.java).apply {
+                        putExtra(EXTRA_MESSAGE, message)
+                    }
+                    startActivity(intent)
+                    true
+                }
+                R.id.logout -> {
+                    startActivity(Intent(this,MainActivity::class.java))
+                    true
+                }
+                else -> false
+            }
+        }
+
 
         listProduk = ArrayList()
 
@@ -96,4 +136,37 @@ class ListActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu,menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId){
+            R.id.logout -> {
+                startActivity(Intent(this,MainActivity::class.java))
+                return true
+            }
+            R.id.profile -> {
+                val message = binding.txtNama.text.toString() // ganti sesuai ID EditText kamu
+                val intent = Intent(this, ProfileActivity::class.java).apply {
+                    putExtra(EXTRA_MESSAGE, message)
+                }
+                startActivity(intent)
+                return true
+            }
+            R.id.dashboard -> {
+                val message = binding.txtNama.text.toString() // ganti sesuai ID EditText kamu
+                val intent = Intent(this, DashboardActivity::class.java).apply {
+                    putExtra(EXTRA_MESSAGE, message)
+                }
+                startActivity(intent)
+                return true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+
 }

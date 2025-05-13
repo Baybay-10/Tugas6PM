@@ -50,7 +50,7 @@
         app:layout_constraintVertical_bias="0.268" />
 
     <EditText
-        android:id="@+id/editTextText2"
+        android:id="@+id/edtUsername"
         android:layout_width="260dp"
         android:layout_height="67dp"
         android:ems="10"
@@ -65,7 +65,7 @@
         app:layout_constraintVertical_bias="0.401" />
 
     <EditText
-        android:id="@+id/editTextTextEmailAddress2"
+        android:id="@+id/edtEmail"
         android:layout_width="260dp"
         android:layout_height="67dp"
         android:ems="10"
@@ -80,7 +80,7 @@
         app:layout_constraintVertical_bias="0.521" />
 
     <EditText
-        android:id="@+id/editTextTextPassword"
+        android:id="@+id/edtPass"
         android:layout_width="260dp"
         android:layout_height="67dp"
         android:ems="10"
@@ -95,7 +95,7 @@
         app:layout_constraintVertical_bias="0.651" />
 
     <EditText
-        android:id="@+id/editTextTextPassword3"
+        android:id="@+id/edtConfirmPass"
         android:layout_width="260dp"
         android:layout_height="67dp"
         android:ems="10"

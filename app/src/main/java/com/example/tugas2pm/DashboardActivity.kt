@@ -14,11 +14,14 @@ import android.widget.Toast
 import android.widget.Toast.*
 import com.example.tugas2pm.databinding.ActivityDashboardBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
 
 
 class DashboardActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityDashboardBinding
+    private lateinit var auth: FirebaseAuth
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -26,6 +29,8 @@ class DashboardActivity : AppCompatActivity() {
 
         binding = ActivityDashboardBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        auth = FirebaseAuth.getInstance()
 
         val pesan = intent.getStringExtra(EXTRA_MESSAGE)
         val textView:TextView = findViewById<TextView>(R.id.txtNama).apply {
@@ -39,7 +44,7 @@ class DashboardActivity : AppCompatActivity() {
         bottomNav.setOnNavigationItemSelectedListener { menu ->
             when (menu.itemId){
                 R.id.dashboard ->{
-                    val message = binding.txtNama.text.toString() // ganti sesuai ID EditText kamu
+                    val message = binding.txtNama.text.toString() // ganti sesuai ID EditText
                     val intent = Intent(this, DashboardActivity::class.java).apply {
                         putExtra(EXTRA_MESSAGE, message)
                     }
@@ -47,7 +52,7 @@ class DashboardActivity : AppCompatActivity() {
                     true
                 }
                 R.id.profile -> {
-                    val message = binding.txtNama.text.toString() // ganti sesuai ID EditText kamu
+                    val message = binding.txtNama.text.toString() // ganti sesuai ID EditText
                     val intent = Intent(this, ProfileActivity::class.java).apply {
                         putExtra(EXTRA_MESSAGE, message)
                     }
@@ -55,13 +60,16 @@ class DashboardActivity : AppCompatActivity() {
                     true
                 }
                 R.id.logout -> {
-                    startActivity(Intent(this,MainActivity::class.java))
+                    auth.signOut()
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(intent)
+                    finish()
                     true
                 }
                 else -> false
             }
         }
-
 
         // Data yang akan ditampilkan di ListView
         val list = arrayOf(
@@ -111,7 +119,11 @@ class DashboardActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId){
             R.id.logout -> {
-                startActivity(Intent(this,MainActivity::class.java))
+                auth.signOut()
+                val intent = Intent(this, MainActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
+                finish()
                 return true
             }
             R.id.profile -> {

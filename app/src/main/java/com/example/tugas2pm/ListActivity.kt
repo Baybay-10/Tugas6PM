@@ -16,12 +16,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.tugas2pm.databinding.ActivityDashboardBinding
 import com.example.tugas2pm.databinding.ActivityListBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
 
 class ListActivity : AppCompatActivity() {
     private lateinit var binding : ActivityListBinding
     private lateinit var produkRecyclerView: RecyclerView
     private lateinit var produkAdapter: MyAdapter
     private lateinit var listProduk : ArrayList<ItemData>
+
+    private lateinit var auth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -29,6 +32,8 @@ class ListActivity : AppCompatActivity() {
 
         binding = ActivityListBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        auth = FirebaseAuth.getInstance()
 
         val pesan = intent.getStringExtra(EXTRA_MESSAGE)
         val textView: TextView = findViewById<TextView>(R.id.txtNama).apply {
@@ -42,7 +47,7 @@ class ListActivity : AppCompatActivity() {
         bottomNav.setOnNavigationItemSelectedListener { menu ->
             when (menu.itemId){
                 R.id.dashboard ->{
-                    val message = binding.txtNama.text.toString() // ganti sesuai ID EditText kamu
+                    val message = binding.txtNama.text.toString() // ganti sesuai ID EditText
                     val intent = Intent(this, DashboardActivity::class.java).apply {
                         putExtra(EXTRA_MESSAGE, message)
                     }
@@ -50,7 +55,7 @@ class ListActivity : AppCompatActivity() {
                     true
                 }
                 R.id.profile -> {
-                    val message = binding.txtNama.text.toString() // ganti sesuai ID EditText kamu
+                    val message = binding.txtNama.text.toString() // ganti sesuai ID EditText
                     val intent = Intent(this, ProfileActivity::class.java).apply {
                         putExtra(EXTRA_MESSAGE, message)
                     }
@@ -58,7 +63,11 @@ class ListActivity : AppCompatActivity() {
                     true
                 }
                 R.id.logout -> {
-                    startActivity(Intent(this,MainActivity::class.java))
+                    auth.signOut()
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(intent)
+                    finish()
                     true
                 }
                 else -> false
@@ -145,11 +154,15 @@ class ListActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId){
             R.id.logout -> {
-                startActivity(Intent(this,MainActivity::class.java))
+                auth.signOut()
+                val intent = Intent(this, MainActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
+                finish()
                 return true
             }
             R.id.profile -> {
-                val message = binding.txtNama.text.toString() // ganti sesuai ID EditText kamu
+                val message = binding.txtNama.text.toString() // ganti sesuai ID EditText
                 val intent = Intent(this, ProfileActivity::class.java).apply {
                     putExtra(EXTRA_MESSAGE, message)
                 }
@@ -157,7 +170,7 @@ class ListActivity : AppCompatActivity() {
                 return true
             }
             R.id.dashboard -> {
-                val message = binding.txtNama.text.toString() // ganti sesuai ID EditText kamu
+                val message = binding.txtNama.text.toString() // ganti sesuai ID EditText
                 val intent = Intent(this, DashboardActivity::class.java).apply {
                     putExtra(EXTRA_MESSAGE, message)
                 }

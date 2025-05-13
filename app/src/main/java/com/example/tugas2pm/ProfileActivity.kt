@@ -8,10 +8,12 @@ import android.widget.ArrayAdapter
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tugas2pm.databinding.ActivityProfileBinding
+import com.google.firebase.auth.FirebaseAuth
 
 class ProfileActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityProfileBinding
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,6 +22,7 @@ class ProfileActivity : AppCompatActivity() {
         binding = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        auth = FirebaseAuth.getInstance()
         val pesan = intent.getStringExtra(EXTRA_MESSAGE)
 
         val textView: TextView = findViewById<TextView>(R.id.txtNama).apply {
@@ -27,7 +30,10 @@ class ProfileActivity : AppCompatActivity() {
         }
 
         // Data untuk list view
-        val list = listOf("Mobile Legends", "PUBG Mobile", "Genshin Impact")
+        val list = listOf("Mobile Legends",
+            "PUBG Mobile",
+            "Genshin Impact",
+            "Free Fire")
 
         // Membuat ArrayAdapter dan menghubungkan data ke ListView
         val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, list)
@@ -52,7 +58,7 @@ class ProfileActivity : AppCompatActivity() {
                     true
                 }
                 R.id.profile -> {
-                    val message = binding.txtNama.text.toString() // ganti sesuai ID EditText kamu
+                    val message = binding.txtNama.text.toString() // ganti sesuai ID EditText
                     val intent = Intent(this, ProfileActivity::class.java).apply {
                         putExtra(EXTRA_MESSAGE, message)
                     }
@@ -60,7 +66,11 @@ class ProfileActivity : AppCompatActivity() {
                     true
                 }
                 R.id.logout -> {
-                    startActivity(Intent(this, MainActivity::class.java))
+                    auth.signOut()
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(intent)
+                    finish()
                     true
                 }
                 else -> false
@@ -76,8 +86,12 @@ class ProfileActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.logout -> {
-                startActivity(Intent(this, MainActivity::class.java))
-                true
+                auth.signOut()
+                val intent = Intent(this, MainActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
+                finish()
+                return true
             }
             R.id.profile -> {
                 val message = binding.txtNama.text.toString() // ganti sesuai ID EditText kamu
